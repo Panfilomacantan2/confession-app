@@ -10,7 +10,7 @@ const fetchData = async (url) => {
 
 	const response = await fetch(url);
 	const data = await response.json();
-	displayConfessions(data);
+	displayConfessions(data.sort((a, b) => b - a));
 
 	isLoading = false;
 	checkLoading(isLoading);
@@ -68,13 +68,16 @@ const displayConfessions = async (data) => {
 
 	if (data.length > 0) {
 		data.forEach((confession) => {
-			const { createdAt, codeName, message } = confession;
+			const { _id, createdAt, codeName, message } = confession;
 			output += `
 		<div class="confession-item">
+		     <div class="confession-header" onclick="deletePost('${_id}')">${moment(createdAt)}</div>
 				<p class="confession-message">
 					${message}
+					
 				</p>
-				<p class="confession-code-name">-<strong>${codeName}</strong>-</p>
+				<p class="confession-code-name"> - <strong>${codeName}</strong> -</p>
+
 			</div>
 		`;
 		});
@@ -82,8 +85,8 @@ const displayConfessions = async (data) => {
 		output += '<p class="no-result">No confessions yet.</p>';
 	}
 	confessionsContainer.innerHTML = output;
-	console.log(data);
 };
+
 
 // TOGGLE CONFESSIONS CONTAINER
 const showConfessionsBtn = document.querySelector('#showConfessions');
@@ -92,11 +95,20 @@ const showConfessions = () => {
 	const confessionsContainer = document.querySelector('.confession-container');
 	confessionsContainer.classList.toggle('show');
 
-	if(confessionsContainer.classList.contains('show')){
+	if (confessionsContainer.classList.contains('show')) {
 		showConfessionsBtn.innerText = 'Hide Confessions';
-	}else{
+	} else {
 		showConfessionsBtn.innerText = 'Show Confessions';
 	}
 };
 
 showConfessionsBtn.addEventListener('click', showConfessions);
+
+const deletePost = async (id) => {
+	const response = await axios.delete(`${BASE_URL}/${id}`);
+	console.log(response);
+	// swal('Your message was deleted successfully.', '', 'success');
+	// displayConfessions();
+
+	console.log(id);
+};

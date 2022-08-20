@@ -14,7 +14,7 @@
 		<div class="loader-container">
 			<img src="./loading_icon.gif" alt="loader-icon" />
 		</div>
-       
+
 		<!-- SHOW BUTTON -->
 		<button id="showConfessions" class="show-confessions">Show Confessions</button>
 
@@ -22,11 +22,11 @@
 			<h3>Confession Wall</h3>
 			<form>
 				<div class="form-control">
-					<label>Code Name</label>
+					<label><strong>Code Name</strong></label>
 					<input type="text" id="codeName" />
 				</div>
 				<div class="form-control">
-					<label>Message</label>
+					<label><strong>Message</strong></label>
 					<textarea id="messageBody" class="message-body"></textarea>
 				</div>
 				<button type="submit" id="submitMessageBtn">Send</button>
@@ -36,6 +36,7 @@
 		<div class="confession-container"></div>
 
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script src="https://momentjs.com/downloads/moment.js"></script>
 		<script src="./app.js"></script>
 	</body>
 </html>
