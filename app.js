@@ -1,4 +1,4 @@
-const BASE_URL = 'https://confession-wall.herokuapp.com/api/post';
+const BASE_URL = 'https://confession-api.onrender.com/api/post';
 const BASE_URL_USER = 'https://confession-wall.herokuapp.com/api/user';
 let isLoading = false;
 
@@ -21,10 +21,8 @@ const fetchData = async (url) => {
 const checkLoading = (loaded) => {
 	const loaderContainer = document.querySelector('.loader-container');
 	if (loaded) {
-		console.log('show spinner');
 		loaderContainer.classList.add('show-loader');
 	} else {
-		console.log('hide spinner');
 		loaderContainer.classList.remove('show-loader');
 	}
 };
@@ -64,29 +62,38 @@ const resetFields = () => {
 
 const displayConfessions = async (data) => {
 	const confessionsContainer = document.querySelector('.confession-container');
-	let output = '';
 
 	if (data.length > 0) {
 		data.forEach((confession) => {
 			const { _id, createdAt, codeName, message } = confession;
-			output += `
-		<div class="confession-item">
-		     <div class="confession-header" onclick="deletePost('${_id}')">${moment(createdAt)}</div>
-				<p class="confession-message">
-					${message}
-					
-				</p>
-				<p class="confession-code-name"> - <strong>${codeName}</strong> -</p>
-
-			</div>
-		`;
+			const confessionItemDiv = document.createElement('div');
+			confessionItemDiv.classList.add('confession-item');
+			const confessionHeaderDiv = document.createElement('div');
+			confessionHeaderDiv.classList.add('confession-header');
+			confessionItemDiv.appendChild(confessionHeaderDiv);
+			const confessionHeaderTextNode = document.createTextNode(`${moment(createdAt)}`);
+			confessionHeaderDiv.classList.add('confession-header');
+			confessionHeaderDiv.appendChild(confessionHeaderTextNode);
+			const confessionMessage = document.createElement('p');
+			confessionMessage.classList.add('confession-message');
+			const confessionMessageTextNode = document.createTextNode(`${message}`);
+			confessionMessage.appendChild(confessionMessageTextNode);
+			confessionItemDiv.appendChild(confessionMessage);
+			const confessionCodeName = document.createElement('p');
+			confessionCodeName.classList.add('confession-code-name');
+			const codeNameTextNode = document.createTextNode(`-${codeName}-`);
+			confessionCodeName.appendChild(codeNameTextNode);
+			confessionItemDiv.appendChild(confessionCodeName);
+			confessionsContainer.appendChild(confessionItemDiv);
 		});
 	} else {
-		output += '<p class="no-result">No confessions yet.</p>';
+		const noResult = document.createElement('p');
+		noResult.classList.add('no-result');
+		const noResultMsg = document.createTextNode('No confessions yet.');
+		noResult.appendChild(noResultMsg);
+		confessionsContainer.appendChild(noResult);
 	}
-	confessionsContainer.innerHTML = output;
 };
-
 
 // TOGGLE CONFESSIONS CONTAINER
 const showConfessionsBtn = document.querySelector('#showConfessions');
