@@ -10,7 +10,7 @@ const fetchData = async (url) => {
 
 	const response = await fetch(url);
 	const data = await response.json();
-	displayConfessions(data.sort((a, b) => b - a));
+	displayConfessions(data);
 
 	isLoading = false;
 	checkLoading(isLoading);
