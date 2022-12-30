@@ -44,7 +44,6 @@ const addNewConfession = async (e) => {
 			message: messageBody,
 		})
 		.then((response) => {
-			console.log(response);
 			swal('Your message was sent successfully.', '', 'success');
 			submitMessageBtn.innerText = 'Send';
 			resetFields();
@@ -63,7 +62,7 @@ const resetFields = () => {
 const displayConfessions = async (data) => {
 	const confessionsContainer = document.querySelector('.confession-container');
 
-	if (data.length > 0) {
+	if (data?.length > 0) {
 		data.forEach((confession) => {
 			const { _id, createdAt, codeName, message } = confession;
 			const confessionItemDiv = document.createElement('div');
