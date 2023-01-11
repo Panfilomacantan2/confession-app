@@ -69,7 +69,7 @@ function time_ago(time) {
 const fetchData = async () => {
 	isLoading = true;
 
-	const response = await fetch(LOCALHOST_URL);
+	const response = await fetch(BASE_URL);
 	const data = await response.json();
 
 	isLoading = false;
@@ -97,7 +97,7 @@ const addNewConfession = async (e) => {
 	}
 
 	axios
-		.post(LOCALHOST_URL, {
+		.post(BASE_URL, {
 			codeName: codeName.value.trim(),
 			message: messageBody,
 		})
