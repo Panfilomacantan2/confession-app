@@ -151,11 +151,12 @@ button {
 	justify-content: center;
 	align-items: center;
 	background: #fff;
-	border-radius: 10px;
+	border-radius: 3px;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1) 0px 0px 10px;
 	height: 200px;
 	padding: 0 0 20px 0;
 	overflow: hidden;
+	
 }
 
 .confession-message {
@@ -174,10 +175,51 @@ button {
 
 .confession-header {
 	width: 100%;
-	background-color: var(--primary);
-	padding: 10px 20px;
+	background-color: rgba(255, 255, 255, 0.2);
+	padding: 10px;
 	text-align: center;
 	color: #ececec;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.details {
+	flex: 1;
+	text-align: left;
+	margin-left: 10px;
+	color: rgba(0, 0, 0, 0.6);
+	font-weight: 300;
+}
+
+.date {
+	font-size: 14px;
+	font-weight: 200;
+}
+
+.confession {
+	padding: 10px;
+	width: 100%;
+	overflow-y: scroll;
+}
+
+.message {
+	word-wrap: break-word;
+}
+
+hr {
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	width: 93%;
+}
+.confession::-webkit-scrollbar {
+	width: 5px;
+	height: 5px;
+}
+.confession::-webkit-scrollbar-thumb {
+	background: var(--primary);
+	width: 5px;
+	height: 5px;
+	border-radius: 5px;
 }
 
 .confession-container .confession-message::-webkit-scrollbar {
@@ -218,6 +260,14 @@ button {
 	color: #ececec;
 }
 
+.img-box {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	border: rgba(0, 0, 0, 0.5) 1px solid;
+	overflow: hidden;
+}
+
 @media (max-width: 768px) {
 	body {
 		padding: 20px;
@@ -228,5 +278,12 @@ button {
 	}
 	.confession-container {
 		padding: 100px 20px;
+	}
+}
+
+@media (max-width: 650px) {
+	.confession-container {
+		grid-template-columns: 1fr;
+		
 	}
 }
